@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/contactForm/ContactForm';
 import { Filter } from 'components/filter/Filter';
 import { ContactList } from 'components/contactList/ContactList';
@@ -17,25 +17,27 @@ export const App = () => {
    const [name, setName] = useState('');
    const [number, setNumber] = useState('');
 
-  useEffect(() => {
-  loadContactsFromLocalStorage();
-  }, []);
-
-
-  useEffect(() => {
-  saveContactsToLocalStorage();
-  }, [contacts]);
-
-  const loadContactsFromLocalStorage = () => {
-    const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
-    setContacts(storedContacts);
-  }
-
-  const saveContactsToLocalStorage = () => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }
-
  
+  
+  useEffect(() => {
+    const loadContactsFromLocalStorage = () => {
+      const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
+      setContacts(storedContacts);
+    };
+    
+    loadContactsFromLocalStorage();
+    }, []);
+
+  
+    useEffect(() => {
+      const saveContactsToLocalStorage = () => {
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+      };
+     
+      saveContactsToLocalStorage();
+      }, [contacts]);
+  
+     
   const handleSubmit = (e) => {
     e.preventDefault();
 
